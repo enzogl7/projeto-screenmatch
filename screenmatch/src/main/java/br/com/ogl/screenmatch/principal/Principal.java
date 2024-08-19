@@ -4,14 +4,11 @@ package br.com.ogl.screenmatch.principal;
 
 import br.com.ogl.screenmatch.model.DadosSerie;
 import br.com.ogl.screenmatch.model.DadosTemporada;
+import br.com.ogl.screenmatch.model.Serie;
 import br.com.ogl.screenmatch.service.ConsumoApi;
 import br.com.ogl.screenmatch.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Principal {
@@ -83,7 +80,13 @@ public class Principal {
         temporadas.forEach(System.out::println);
     }
 
-    private void listarSeriesBuscadas() {
-        dadosSeries.forEach(System.out::println);
+    private void listarSeriesBuscadas(){
+        List<Serie> series = new ArrayList<>();
+        series = dadosSeries.stream()
+                .map(d -> new Serie(d))
+                .collect(Collectors.toList());
+        series.stream()
+                .sorted(Comparator.comparing(Serie::getGenero))
+                .forEach(System.out::println);
     }
 }
