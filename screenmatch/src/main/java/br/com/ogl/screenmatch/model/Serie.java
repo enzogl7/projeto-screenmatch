@@ -1,6 +1,6 @@
 package br.com.ogl.screenmatch.model;
 
-import br.com.ogl.screenmatch.service.ConsultaChatGPT;
+import br.com.ogl.screenmatch.service.ConsultaMyMemory;
 
 import java.util.OptionalDouble;
 
@@ -27,7 +27,7 @@ public class Serie {
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
-        this.sinopse = dadosSerie.sinopse();
+        this.sinopse = ConsultaMyMemory.obterTraducao(dadosSerie.sinopse()).trim();
     }
 
     public String getTitulo() {
